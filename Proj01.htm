@@ -1,0 +1,247 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>ITSE 1302</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+a:hover {color: #cc0000;font-weight: bold;text-decoration: none;}
+
+pre {color: navy;}
+p{color:teal;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+body{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12pt;
+	background-color: #FEFFF0;}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+</head>
+
+<body>
+
+<center>
+<h2>ITSE 1302</h2>
+</center>
+
+<center>
+<h2 style="text-align: center;">Project 01</h2>
+<h2 style="text-align: center;">Statistics </h2>
+</center>
+<p>File Proj01.htm</p>
+<p>Revised 06/27/23</p>
+
+<p>R. G. Baldwin instructor<br/>
+ </p>
+
+<center>
+<h2>Read The Instructions Carefully</h2>
+</center>
+
+<p>A detailed set of instructions is provided in a separate document titled <strong>Instructions for Downloading and Submitting Assignments </strong> that you can
+view in the orientation material for this course.</p>
+<p>I recommend that you study those instructions <strong>very carefully</strong> 
+and make yourself a checklist to ensure that you meet all of the 
+requirements before submitting your project.</p>
+<p>Failure to follow the instructions to the letter usually results in a
+failing grade, normally zero. The general instructions in that document apply
+to this project. In addition, this document provides specific
+instructions for the project. </p>
+
+<p>If you have any questions regarding instructions, please ask them at least
+one week prior to the assignment deadline. Don't end up with a bad grade due to the
+fact that you didn't understand the instructions. </p>
+
+
+
+<center>
+<h2>Typographical Errors</h2>
+</center>
+<p>If you discover any typographical errors in this document, please let me know
+so that I can correct the error and notify all of the students.</p>
+<h2 class="auto-style1">Source Code</h2>
+
+<p>You will find a driver source code file named <strong>Proj01.py</strong> 
+in the same zip file from which you extracted this project specification.</p>
+<h2 class="auto-style1">Python Version Requirements</h2>
+<p>Python is somewhat version sensitive, particularly between version 2.x and 
+version 3.x. Your project will be graded using Python version 3.6.2 or a later version.</p>
+<h2 class="auto-style1">Specific Project Requirements</h2>
+<p>Specific project requirements follow:</p>
+<table border="2" cellpadding="10">
+  <tbody>
+    <tr>
+      <td><p>Proj01 Copyright 2023 R.G.Baldwin</p>
+<p>Among other things, this project requires that you demonstrate your knowledge 
+of:</p>
+<ul>
+	<li>import directives</li>
+	<li>mean</li>
+	<li>median</li>
+	<li>sample standard deviation</li>
+	<li>population standard deviation</li>
+
+
+
+</ul>
+
+	  <p>Before going any further, you should make certain that you have read 
+	  the prescribed material in the Ebook. You can identify that material by 
+	  selecting <strong>Asg01</strong> in the Bb menu and then selecting <strong>MLO-1.1 Objectives, Read, and Do</strong>. 
+	  If you don't understand something in that material, you should ask your 
+	  instructor for clarification.</p>
+	  <p>PROGRAM SPECIFICATIONS</p>
+		<p>The zip file from which you downloaded this file also contains a file 
+		named <strong>Proj01.py</strong> and a file named <strong>Proj01Runner.txt</strong>. 
+		Copy and rename that file 
+		<strong>Proj01Runner.py</strong>.</p>
+	  <p>Since this is your first assignment in this course, you should begin by 
+	  making sure that you understand everything in this document. Then you 
+	  should make sure that you understand all the code in the file named
+	  <strong>Proj01.py</strong>. Then you should make sure that you 
+	  understand all the code in the newly-created file named <strong>
+	  Proj01Runner.py</strong>. If you don't understand something, ask your 
+	  instructor for clarification. (You could also ask ChatGPT for an 
+	  explanation if you choose to do so. Just remember that ChatGPT sometimes 
+	  makes mistakes.)</p>
+	  <p>Edit the new file named <strong>Proj01Runner.py</strong> putting your 
+	  name in the space where indicated. Then insert code where indicated to compute the 
+	  following values for an incoming dataset of arbitrary length and numeric content.</p>
+<ul>
+	<li>mean</li>
+	<li>median</li>
+	<li>sample standard deviation</li>
+	<li>population standard deviation</li>
+
+
+
+</ul>
+
+	  <p>DO NOT modify the code in your copy of the file named <strong>Proj01.py</strong>. If 
+	  you do, your program probably won't meet the assignment specifications 
+	  when I test it with my copy of the file named <strong>Proj01.py</strong>.</p>
+	  <p>Place the file named <strong>Proj01Runner.py</strong> in the same folder as the file named 
+	  <strong>Proj01.py</strong> and 
+	  execute the script in the in the file named <strong>Proj01.py</strong>.</p>
+	  <p>Your code in the file named <strong>Proj01Runner.py</strong> must compute and return the mean, the median,
+the sample standard deviation, and the population standard deviation of an 
+	  incoming dataset without use
+of the statistics functions named sum, mean, median, stdev, or pstdev. You are 
+	  only allowed to import the math library and you must write the code to 
+	  compute those values without the benefit of library functions designed for 
+	  that purpose. </p>
+	  <p>The code in <strong>Proj01.py</strong> expects you to enter two or more 
+	  numeric command-line arguments when you execute the code. If you 
+	  don't enter the command-line arguments, a default dataset is created and 
+	  used in place of the command line arguments. The first sample shown below 
+	  was created without entering the command-line arguments. The second sample 
+	  was created by entering the command-line arguments shown when the program 
+	  was run.</p>
+	  <p>If all of your code is correct, the following output will be displayed 
+	  on the command-line screen. </p>
+<div class="a">
+<pre>
+Expect two or more numeric command-line arguments
+Command-line arguments missing.
+Will use default values instead.
+Default dataset = [1, 2, 3, 4, 5]
+
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+mean okay 3.0
+
+median okay 3
+
+sample standard deviation okay 1.5811
+
+population standard deviation okay 1.4142</pre>
+</div>
+	  <p>If some of your code is not correct, text 
+	  similar to the following will be displayed on the command line screen. </p>
+<div class="a">
+<pre>
+Expect two or more numeric command-line arguments
+random_dataset [1, 2, 3, 4, 5]
+
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+
+mean okay 3.0
+
+median okay 3
+
+sample standard deviation okay 1.5811
+
+OOPS: population standard deviation not okay
+1.5 was calculated
+1.4142 is correct</pre>
+</div>
+	  <p>This second example shows an error in the calculations of the population standard deviation. If you see 
+	  an <strong>OOPS</strong> message, go back and correct your 
+	  errors until you get 
+	  <strong>okay</strong> for all four statistical measures.</p>
+	  <p>Also if you get any runtime errors, you will need to fix your code that is 
+	  causing them. </p>
+	  <p>Be sure that your name appears in the certification as indicated.</p>
+	  <p>The code that you&nbsp;write must not import any libraries other than
+	  <strong>math</strong>.</p>
+	  <p>The program must terminate and return control to the operating system 
+	  when control reaches the end of the file named <strong>Proj01.py</strong>. 
+	  In other words, infinite loops are not allowed.</p>
+	  <p>Do not copy the code from the file named <strong>Proj01.py</strong> into your file named 
+	  <strong>Proj01Runner.py</strong>.</p>
+	  <p>The required output depends on the command-line arguments that are 
+	  entered when the 
+	  program is run. The default dataset or the dataset based on the command-line arguments is printed 
+	  at the beginning. You can use that information to debug your code if 
+	  needed. Your instructor will test your solution with a different dataset.</p>
+	  <p>One good approach is to first calculate the required values with pencil, 
+	  paper, and a calculator. Then convert those processes to code.</p>
+	  <p>The values that you return will be compared with values 
+	  produced by the statistics functions named mean, median, stdev, or pstdev 
+	  and they must match.</p>
+	  <p>Do not round or limit the number of decimal digits in the values that 
+	  your code returns. </p>
+	  <p><strong><em>If you have any questions about this assignment, be sure to 
+	  ask for clarification. Don't end up with a bad grade because you didn't 
+	  understand the requirements.</em></strong></p>
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<p>-end-
+ </p>
+
+</body>
+</html>
