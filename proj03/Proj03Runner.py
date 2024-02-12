@@ -75,19 +75,34 @@ class Runner():
         
 
         # create data for scatter plot
-        scat_data_x = normalRandomGenerator(dataLength=100, lowLim=0, highLim=100)
-        scat_data_y = normalRandomGenerator(dataLength=100, lowLim=0, highLim=100)
+        scat_data_x = []
+        scat_data_y = []
         
-        print(scat_data_x)
+        # create x data
+        for num in range(101):
+            scat_data_x.append(random.randint(0, 100))
+
+        # create y data
+        for num in scat_data_x:
+            scat_data_y.append(num + np.random.normal(0, 20))
+
+        # get averages for scatter plot
+        xAvg = np.average(scat_data_x)
+        yAvg = np.average(scat_data_y)
+        
+
+            
         #Plot scatterplot in upper left quadrant
-        ax[0,0].scatter(scat_data_x,scat_data_y)
+        ax[0,0].scatter(scat_data_x,scat_data_y, color='red', edgecolors='blue')
         ax[0,0].grid(True)
-        ax[0,0].set_title('')
-        
-        # #Plot histogram in upper left quadrant
-        # ax[0,0].hist(data,bins=50,density=True)
-        # ax[0,0].grid(True)
-        # ax[0,0].set_title('Histogram')
+        # plot from avg to min
+        ax[0,0].plot([xAvg,0],[yAvg,0], color='blue')
+        ax[0,0].plot([xAvg,100],[yAvg,100], color='blue')
+        # fitting a linear regression line
+        # m, b = np.polyfit(scat_data_x, scat_data_y, 1)
+
+        # # adding the regression line to the scatter plot
+        # ax[0,0].plot(xAvg, [m*xAvg + b])
 
         #Plot a box plot in lower left quadrant
         ax[1,0].boxplot(data,vert=False)
