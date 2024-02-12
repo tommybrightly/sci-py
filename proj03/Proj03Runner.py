@@ -22,7 +22,8 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import math
-
+from statistics import median, stdev, pstdev, mode, StatisticsError
+from statistics import mean as statMean
 def normalRandomGenerator(seed=1,dataLength=10000,numberSamples=50,lowLim=0,highLim=100):
 
     '''Create a new dataset of dataLength values consisting of the average of numberSamples 
@@ -51,6 +52,22 @@ def normalRandomGenerator(seed=1,dataLength=10000,numberSamples=50,lowLim=0,high
         xData.append(theSum/numberSamples)
         
     return xData
+
+def normalProbabilityDensity(x,mu=0,sigma=1.0):
+    
+    eVal = 2.718281828459045
+    exp = -((x-mu)**2)/(2*(sigma**2))
+    numerator = pow(eVal,exp)
+    denominator = sigma*(math.sqrt(2*math.pi))
+    return numerator/denominator
+
+def standardNormalDistribution(x):
+
+    eVal = 2.718281828459045
+    exp = (-x**2)/2
+    numerator = pow(eVal,exp)
+    denominator = math.sqrt(2*math.pi)
+    return numerator/denominator
 #==============================================================================
 
 class Runner():
@@ -73,7 +90,7 @@ class Runner():
           highLim=400)
         
         
-
+        # SCATTERPLOT FOR TOP LEFT CORNER
         # create data for scatter plot
         scat_data_x = []
         scat_data_y = []
@@ -84,35 +101,69 @@ class Runner():
 
         # create y data
         for num in scat_data_x:
-            scat_data_y.append(num + np.random.normal(0, 20))
+            scat_data_y.append(num + np.random.normal(0, 15))
 
         # get averages for scatter plot
         xAvg = np.average(scat_data_x)
-        yAvg = np.average(scat_data_y)
-        
-
-            
+        yAvg = np.average(scat_data_y)      
+           
         #Plot scatterplot in upper left quadrant
         ax[0,0].scatter(scat_data_x,scat_data_y, color='red', edgecolors='blue')
-        ax[0,0].grid(True)
-        # plot from avg to min
-        ax[0,0].plot([xAvg,0],[yAvg,0], color='blue')
-        ax[0,0].plot([xAvg,100],[yAvg,100], color='blue')
+        
+
         # fitting a linear regression line
-        # m, b = np.polyfit(scat_data_x, scat_data_y, 1)
+        slope, intercept = np.polyfit(scat_data_x, scat_data_y, 1)
+
+        # Create a list of values in the best fit line
+        abline_values = [slope * i + intercept for i in scat_data_x]
 
         # # adding the regression line to the scatter plot
-        # ax[0,0].plot(xAvg, [m*xAvg + b])
+        ax[0,0].plot(scat_data_x, abline_values, 'b')
 
-        #Plot a box plot in lower left quadrant
-        ax[1,0].boxplot(data,vert=False)
-        ax[1,0].grid(True)
-        ax[1,0].set_title('Box Plot')
 
-        #Plot a violin plot in the upper right quadrant
-        ax[0,1].violinplot(data, vert=False, positions=[0.5])
-        ax[0,1].grid(True)
-        ax[0,1].set_title('Violin Plot')
+
+
+        # BELL CURVE IN TOP RIGHT CORNER
+        # plot a standard normal probability density function
+        x = np.arange(-3,3,0.1)
+        y = [standardNormalDistribution(val) for val in x]
+
+        ax[0,1].plot(x, y)
+
+
+
+
+        # BIMODAL HISTOGRAM IN BOTTOM LEFT CORNER
+
+        #Create a dataset
+        newData = normalRandomGenerator(
+          dataLength=10001,
+          numberSamples=20,
+          lowLim=0,
+          highLim=300)
+        #Create another dataset
+        bimodalList = normalRandomGenerator(
+          dataLength=10001,
+          numberSamples=4,
+          lowLim=0,
+          highLim=100)  
+        #Create skewed dataset
+        skewedList = normalRandomGenerator(
+          dataLength=2000,
+          numberSamples=4,
+          lowLim=125,
+          highLim=300)  
+        
+        # this leaves less gap between peaks
+        for cnt in range(len(newData)):
+            newData[cnt] -= 20
+
+        
+
+        #Plot and label histogram
+        ax[1,0].hist(newData+bimodalList+skewedList,bins=50,density=True)
+        
+
 
         # Plot a flipped histogram in the lower right quadrant
         mean = np.mean(data)
@@ -122,7 +173,10 @@ class Runner():
         ax[1,1].hist(flipped_data, bins=50, density=True)
         ax[1,1].grid(True)
         ax[1,1].set_title('Flipped Histogram')
-        
+
+
+
+
         #Add title to the figure and show it
         plt.suptitle('Thomas Brightly')
 
