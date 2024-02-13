@@ -1,45 +1,10 @@
-'''
-This code defines a Python module that generates random data sets and visualizes them 
-using Matplotlib.
 
-The module includes a function called normalRandomGenerator that takes several input 
-parameters (including seed, data length, number of samples, and upper/lower limits) 
-and returns a list of randomly generated values. The function generates dataLength 
-values by repeatedly averaging numberSamples values randomly selected from a 
-uniformly distributed population defined by lowLim and highLim.
-
-The module also defines a class called Runner, which includes a method called run(). 
-The run() method generates a new data set using the normalRandomGenerator function 
-and then creates a 2x2 grid of subplots using Matplotlib. The upper-left subplot 
-shows a histogram of the generated data using 50 bins, the lower-left subplot shows 
-a box plot of the data, the upper-right subplot shows a violin plot of the data, 
-and the lower-right subplot shows a "flipped" histogram.
-
-Finally, the run() method adds a title to the overall figure, adjusts the layout 
-of the subplots for better presentation, and shows the figure.
-'''
 import numpy as np
 import random
 import matplotlib.pyplot as plt
 import math
-from statistics import median, stdev, pstdev, mode, StatisticsError
 from statistics import mean as statMean
 def normalRandomGenerator(seed=1,dataLength=10000,numberSamples=50,lowLim=0,highLim=100):
-
-    '''Create a new dataset of dataLength values consisting of the average of numberSamples 
-    samples taken from a population of uniformly distributed values between lowLim 
-    and highLim generated with a seed of seed.
-
-    Input keyword parameters and their default values:
-
-    seed = 1 seed used to generate the uniformly distributed values
-    dataLength = 10000 number of samples in the returned list of values
-    numberSamples = 50 number of samples taken from the uniformly distributed population
-                       and averaged into the output
-    lowLim = 0 lower limit value of the uniformly distributed population
-    highLim = 100 high limit value of the uniformly distributed population
-
-    returns: a list containing the dataset'''
 
 
     xData = []
@@ -68,6 +33,27 @@ def standardNormalDistribution(x):
     numerator = pow(eVal,exp)
     denominator = math.sqrt(2*math.pi)
     return numerator/denominator
+
+def cumulativeDistribution(x):
+    # constants
+    a1 =  0.254829592
+    a2 = -0.284496736
+    a3 =  1.421413741
+    a4 = -1.453152027
+    a5 =  1.061405429
+    p  =  0.3275911
+
+    # Save the sign of x
+    sign = 1
+    if x < 0:
+        sign = -1
+    x = abs(x)/math.sqrt(2.0)
+
+    # A&S formula 7.1.26
+    t = 1.0/(1.0 + p*x)
+    y = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*math.exp(-x*x)
+
+    return 0.5*(1.0 + sign*y)
 #==============================================================================
 
 class Runner():
@@ -158,6 +144,9 @@ class Runner():
         for cnt in range(len(newData)):
             newData[cnt] -= 20
 
+        # less gap in skewed data
+        for x in range(len(skewedList)):
+            skewedList[x] -= 20
         
 
         #Plot and label histogram
@@ -165,17 +154,13 @@ class Runner():
         
 
 
-        # Plot a flipped histogram in the lower right quadrant
-        mean = np.mean(data)
-        centered_data = data - mean
-        flipped_data = -centered_data
-        flipped_data += mean
-        ax[1,1].hist(flipped_data, bins=50, density=True)
-        ax[1,1].grid(True)
-        ax[1,1].set_title('Flipped Histogram')
+        # CUMULATIVE DISTRIBUTION IN BOTTOM RIGHT CORNER
+
+        xCumulative = np.arange(-3,3,0.1)
+        yCumulative = [cumulativeDistribution(val) for val in xCumulative]
 
 
-
+        ax[1,1].plot(xCumulative,yCumulative)
 
         #Add title to the figure and show it
         plt.suptitle('Thomas Brightly')
